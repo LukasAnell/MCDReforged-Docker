@@ -2,6 +2,15 @@
 set -e
 
 #############################################
+# Initialize MCDReforged on first run
+#############################################
+
+if [ ! -f "$MC_DR_DIR/config/config.yml" ]; then
+    echo "MCDReforged not initialized. Running init..."
+    mcdreforged init
+fi
+
+#############################################
 # Configuration
 #############################################
 
