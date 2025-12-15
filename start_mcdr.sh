@@ -67,4 +67,4 @@ fi
 #############################################
 
 echo "Starting MCDReforged..."
-exec mcdreforged --no-console
+exec mcdreforged
