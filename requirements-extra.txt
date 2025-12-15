@@ -1,0 +1,9 @@
+cryptography
+APScheduler
+hjson
+pynbt
+SQLAlchemy
+redbaron
+pytz
+xxhash
+zstandard
