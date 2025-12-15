@@ -2,21 +2,12 @@
 set -e
 
 #############################################
-# Initialize MCDReforged on first run
-#############################################
-
-if [ ! -f "$MC_DR_DIR/config/config.yml" ]; then
-    echo "MCDReforged not initialized. Running init..."
-    mcdreforged init
-fi
-
-#############################################
 # Configuration
 #############################################
 
 MC_DR_DIR="/data"
 VENV_DIR="$MC_DR_DIR/venv"
-PLUGINS_DIR="$MC_DR_DIR/plugins"
+REQ_EXTRA="$MC_DR_DIR/requirements-extra.txt"
 
 #############################################
 # Ensure working directory exists
@@ -30,8 +21,8 @@ cd "$MC_DR_DIR"
 #############################################
 
 if [ ! -d "$VENV_DIR" ]; then
-    echo "Creating Python virtual environment..."
-    python3 -m venv "$VENV_DIR"
+  echo "Creating Python virtual environment at $VENV_DIR..."
+  python3 -m venv "$VENV_DIR"
 fi
 
 #############################################
@@ -41,47 +32,39 @@ fi
 source "$VENV_DIR/bin/activate"
 
 #############################################
-# Upgrade pip (safe, fast)
+# Upgrade packaging tooling
 #############################################
 
-pip install --upgrade pip
+pip install --upgrade pip setuptools wheel
 
 #############################################
-# Install / upgrade plugin dependencies
+# Ensure MCDReforged is installed in THIS venv
+# (so all future pip installs land in /data/venv)
 #############################################
 
-if [ -d "$PLUGINS_DIR" ]; then
-    echo "Checking plugin dependencies..."
+pip install --upgrade mcdreforged
 
-    for plugin in "$PLUGINS_DIR"/*; do
-        [[ -e "$plugin" ]] || continue
+#############################################
+# Optional: install server-specific extra requirements (persistent)
+#############################################
 
-        META_FILE=""
-
-        if [[ "$plugin" == *.pyz ]]; then
-            unzip -o -qq "$plugin" mcdreforged.plugin.json -d /tmp/plugin_meta 2>/dev/null || continue
-            META_FILE="/tmp/plugin_meta/mcdreforged.plugin.json"
-        elif [[ "$plugin" == *.py ]]; then
-            META_FILE="$plugin"
-        fi
-
-        if [ -f "$META_FILE" ]; then
-            DEPS=$(jq -r '.dependencies[]?' "$META_FILE" 2>/dev/null || true)
-
-            if [ -n "$DEPS" ]; then
-                echo "Installing dependencies for $(basename "$plugin"): $DEPS"
-                pip install --upgrade $DEPS || \
-                    echo "Warning: some dependencies failed for $(basename "$plugin")"
-            fi
-        fi
-
-        rm -rf /tmp/plugin_meta
-    done
+if [ -f "$REQ_EXTRA" ]; then
+  echo "Installing extra requirements from $(basename "$REQ_EXTRA")..."
+  pip install -r "$REQ_EXTRA" || echo "Warning: some extra requirements failed to install"
 fi
 
 #############################################
-# Start MCDReforged
+# Initialize MCDReforged on first run (idempotent)
+#############################################
+
+if [ ! -f "$MC_DR_DIR/config/config.yml" ]; then
+  echo "MCDReforged not initialized. Running init..."
+  mcdreforged init
+fi
+
+#############################################
+# Start MCDReforged (container-safe)
 #############################################
 
 echo "Starting MCDReforged..."
-exec mcdreforged
+exec mcdreforged --no-console
