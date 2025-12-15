@@ -17,7 +17,6 @@ ENV JAVA_HOME=/opt/java
 ENV PATH=$JAVA_HOME/bin:$PATH
 
 RUN pip install --no-cache-dir mcdreforged
-RUN pip install mcdreforged -U
 
 COPY start_mcdr.sh /usr/local/bin/start_mcdr.sh
 RUN chmod +x /usr/local/bin/start_mcdr.sh
