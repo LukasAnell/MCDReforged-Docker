@@ -18,6 +18,16 @@ ENV PATH=$JAVA_HOME/bin:$PATH
 
 RUN pip install --no-cache-dir mcdreforged
 
+RUN pip install --no-cache-dir \
+  cryptography \
+  APScheduler \
+  hjson \
+  requests \
+  aiohttp \
+  websockets \
+  pydantic \
+  PyYAML
+
 COPY start_mcdr.sh /usr/local/bin/start_mcdr.sh
 RUN chmod +x /usr/local/bin/start_mcdr.sh
 
