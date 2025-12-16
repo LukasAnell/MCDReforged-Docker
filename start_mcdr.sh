@@ -54,7 +54,7 @@ if [ -f "$REQ_EXTRA" ]; then
 fi
 
 #############################################
-# Initialize MCDReforged on first run (idempotent)
+# Initialize MCDReforged on first run
 #############################################
 
 if [ ! -f "$MC_DR_DIR/config/config.yml" ]; then
