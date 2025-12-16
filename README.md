@@ -6,17 +6,17 @@ This repository contains a Docker setup for running [MCDReforged](https://mcdref
 
 ## Repository Contents
 
-- **`Dockerfile`**
+- **`Dockerfile`**<br>
   Builds the MCDReforged image with:
   - Python 3.12
   - Java 21.0.9
   - MCDReforged
   - Some Python dependencies commonly used by MCDR plugins
 
-- **`docker-compose.yml`**
+- **`docker-compose.yml`**<br>
   Defines the MCDR service, publishes the required ports (Minecraft), and mounts persistent data.
 
-- **`start_mcdr.sh`**
+- **`start_mcdr.sh`**<br>
   Container entrypoint script that:
   - Creates and uses a persistent Python virtual environment in `/data/venv`
   - Installs/updates MCDReforged inside the venv
@@ -24,7 +24,7 @@ This repository contains a Docker setup for running [MCDReforged](https://mcdref
   - Runs `mcdreforged init` on first startup
   - Starts MCDReforged in a container-safe way otherwise
 
-- **`requirements-extra.txt`**
+- **`requirements-extra.txt`**<br>
   - A persistent list of plugin-specific Python dependencies that are not baked into the base image.
   - Can be modified based on your MCDR plugins.
   - This file is tracked in Git so deployments are reproducible.
