@@ -92,8 +92,8 @@ This allows for hot-reloading plugins without rebuilding the image.
 
 ## Requirements
 
-- Docker
-- Docker Compose
-- A Minecraft server JAR placed in `data/server/`
+- [Docker](https://docs.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- A [Minecraft server JAR](https://www.minecraft.net/en-us/download/server) placed in `data/server/`
 
 ---
