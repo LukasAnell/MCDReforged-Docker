@@ -24,7 +24,7 @@ This repository contains a Docker setup for running [MCDReforged](https://mcdref
   - Runs `mcdreforged init` on first startup
   - Starts MCDReforged in a container-safe way otherwise
 
-- **`requirements-extra.txt`**<br>
+- **`requirements-extra.txt`**
   - A persistent list of plugin-specific Python dependencies that are not baked into the base image.
   - Can be modified based on your MCDR plugins.
   - This file is tracked in Git so deployments are reproducible.
