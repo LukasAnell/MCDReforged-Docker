@@ -4,7 +4,6 @@ services:
     ports:
       - "25565:25565"
       - "8000:8000"
-    container_name: mcdr
     volumes:
       - ./data:/data
     command: start_mcdr.sh
