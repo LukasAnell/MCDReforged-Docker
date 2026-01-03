@@ -2,8 +2,8 @@ services:
   mcdr:
     build: .
     ports:
-      - "25565:25565"
-      - "8000:8000"
+      - "25565-25665:25565"
+      - "8000-8100:8000"
     volumes:
       - ./data:/data
     command: start_mcdr.sh
