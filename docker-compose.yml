@@ -2,8 +2,9 @@ services:
   mcdr:
     build: .
     ports:
-      - "25565-25665:25565"
       - "8000-8100:8000"
+      - "25565-25665:25565" # mc server
+      - "25575-25675:25575" # rcon
     volumes:
       - ./data:/data
     command: start_mcdr.sh
