@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     jq \
  && rm -rf /var/lib/apt/lists/*
 
-RUN curl -L -o /tmp/jdk.tar.gz https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.9%2B10/OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.9_10.tar.gz \
+RUN curl -L -o /tmp/jdk.tar.gz https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.1%2B8/OpenJDK25U-jdk_aarch64_linux_hotspot_25.0.1_8.tar.gz \
  && mkdir -p /opt/java \
  && tar -xzf /tmp/jdk.tar.gz -C /opt/java --strip-components=1 \
  && rm /tmp/jdk.tar.gz
