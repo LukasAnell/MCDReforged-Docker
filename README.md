@@ -9,7 +9,7 @@ This repository contains a Docker setup for running [MCDReforged](https://mcdref
 - **`Dockerfile`**<br>
   Builds the MCDReforged image with:
   - Python 3.12
-  - Java 21.0.9
+  - Java 25.0.1
   - MCDReforged
   - Some Python dependencies commonly used by MCDR plugins
 
